@@ -45,6 +45,17 @@ namespace KazouAPI
             }
 
             DBInitializer.Initialize(kazouContext);
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
