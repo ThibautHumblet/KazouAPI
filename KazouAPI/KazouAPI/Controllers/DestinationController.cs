@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace KazouAPI.Controllers
 {
-    [Route("api/v1/monis")]
-    public class MoniController: Controller
+    [Route("api/v1/destinations")]
+    public class DestinationController : Controller
     {
         private readonly KazouContext context;
-        public MoniController(KazouContext context)
+        public DestinationController(KazouContext context)
         {
             this.context = context;
         }
 
         [HttpGet]
-        public List<Moni> GetAllMonis()
+        public List<Destination> GetAllDestinations()
         {
-            return context.Monis.ToList();
+            return context.Destinations.ToList();
         }
     }
 }
