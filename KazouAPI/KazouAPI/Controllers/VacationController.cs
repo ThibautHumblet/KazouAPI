@@ -27,7 +27,7 @@ namespace KazouAPI.Controllers
         [HttpGet]
         public IActionResult GetVacation(int id)
         {
-            Vacation vacation = context.Vacations.Find(id);
+            Vacation vacation = context.Vacations.Include(d => d.Destination).SingleOrDefault(d => d.VacationID == id);
             if (vacation == null)
                 return NotFound();
             return Ok(vacation);

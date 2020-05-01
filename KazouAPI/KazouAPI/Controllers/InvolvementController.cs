@@ -27,7 +27,7 @@ namespace KazouAPI.Controllers
         [HttpGet]
         public IActionResult GetInvolvement(int id)
         {
-            Involvement involvement = context.Involvements.Find(id);
+            Involvement involvement = context.Involvements.Include( d => d.Vacation).Include(d => d.Worker).Include(d => d.Profile).SingleOrDefault(d => d.InvolvementID == id);
             if (involvement == null)
                 return NotFound();
             return Ok(involvement);
