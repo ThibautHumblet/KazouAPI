@@ -49,6 +49,7 @@ namespace KazouAPI.Controllers
 
             originalWorker.FirstName = updateWorker.FirstName;
             originalWorker.LastName = updateWorker.LastName;
+            originalWorker.EmailAddress = updateWorker.EmailAddress;
             originalWorker.BirthDay = updateWorker.BirthDay;
             context.SaveChanges();
             return Ok(originalWorker);

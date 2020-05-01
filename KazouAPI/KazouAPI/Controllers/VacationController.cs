@@ -18,9 +18,42 @@ namespace KazouAPI.Controllers
         }
 
         [HttpGet]
-        public List<Vacation> GetAllVacations()
+        public List<Vacation> GetAllVacations(string name, string startDate, string destinationID, string sort, int? page, int pageLength = 5, string dir = "asc")
         {
-            return context.Vacations.Include(i => i.Destination).ToList();
+            IQueryable<Vacation> query = context.Vacations;
+
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(d => d.Name == name);
+            if (!string.IsNullOrWhiteSpace(startDate))
+                query = query.Where(d => d.StartDate == DateTime.Parse(startDate));
+            if (!string.IsNullOrWhiteSpace(destinationID))
+                query = query.Where(d => d.DestinationID == int.Parse(destinationID));
+                
+
+            if (page.HasValue)
+                query = query.Skip(page.Value * pageLength);
+            query = query.Take(pageLength);
+
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                switch (sort)
+                {
+                    case "name":
+                        if (dir == "asc")
+                            query = query.OrderBy(d => d.Name);
+                        else if (dir == "desc")
+                            query = query.OrderByDescending(d => d.Name);
+                        break;
+                    case "startdate":
+                        if (dir == "asc")
+                            query = query.OrderBy(d => d.StartDate);
+                        else if (dir == "desc")
+                            query = query.OrderByDescending(d => d.StartDate);
+                        break;
+                }
+            }
+
+            return query.Include(i => i.Destination).ToList();
         }
 
         [Route("{id}")]

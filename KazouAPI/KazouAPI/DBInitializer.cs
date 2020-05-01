@@ -23,6 +23,7 @@ namespace KazouAPI
                 {
                     FirstName = "Thibaut",
                     LastName = "Humblet",
+                    EmailAddress = "thibaut.humblet@student.ap.be",
                     BirthDay = DateTime.Now
                 };
 

@@ -13,6 +13,7 @@ namespace KazouAPI.Model
         public int WorkerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string EmailAddress { get; set; }
         public DateTime BirthDay { get; set; }
         [JsonIgnore]
         public List<Involvement> Involvements { get; set; }
