@@ -22,5 +22,49 @@ namespace KazouAPI.Controllers
         {
             return context.Involvements.Include(i => i.Vacation).Include(i => i.Worker).Include(i => i.Profile).ToList();
         }
+
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetInvolvement(int id)
+        {
+            Involvement involvement = context.Involvements.Find(id);
+            if (involvement == null)
+                return NotFound();
+            return Ok(involvement);
+        }
+
+        [HttpPost]
+        public IActionResult CreateInvolvement([FromBody] Involvement newInvolvement)
+        {
+            context.Involvements.Add(newInvolvement);
+            context.SaveChanges();
+            return Created("", newInvolvement);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateInvolvement([FromBody] Involvement updateInvolvement)
+        {
+            Involvement originalInvolvement = context.Involvements.Find(updateInvolvement.InvolvementID);
+            if (originalInvolvement == null)
+                return NotFound();
+
+            originalInvolvement.VacationID = updateInvolvement.VacationID;
+            originalInvolvement.WorkerID = updateInvolvement.WorkerID;
+            originalInvolvement.ProfileID = updateInvolvement.ProfileID;
+            context.SaveChanges();
+            return Ok(originalInvolvement);
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public IActionResult DeleteInvolvement(int id)
+        {
+            Involvement involvement = context.Involvements.Find(id);
+            if (involvement == null)
+                return NotFound();
+            context.Involvements.Remove(involvement);
+            context.SaveChanges();
+            return NoContent();
+        }
     }
 }
