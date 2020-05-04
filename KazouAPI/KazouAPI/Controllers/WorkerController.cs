@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace KazouAPI.Controllers
 {
     [Route("api/v1/workers")]
-    public class WorkerController: Controller
+    [ApiController]
+    public class WorkerController: ControllerBase
     {
         private readonly KazouContext context;
         public WorkerController(KazouContext context)
@@ -37,6 +38,8 @@ namespace KazouAPI.Controllers
         {
             context.Workers.Add(newWorker);
             context.SaveChanges();
+            if (!ModelState.IsValid)
+                return BadRequest();
             return Created("", newWorker);
         }
 

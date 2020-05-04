@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace KazouAPI.Controllers
 {
     [Route("api/v1/vacations")]
-    public class VacationController : Controller
+    [ApiController]
+    public class VacationController : ControllerBase
     {
         private readonly KazouContext context;
         public VacationController(KazouContext context)
@@ -71,6 +72,8 @@ namespace KazouAPI.Controllers
         {
             context.Vacations.Add(newVacation);
             context.SaveChanges();
+            if (!ModelState.IsValid) 
+                return BadRequest();
             return Created("", newVacation);
         }
 

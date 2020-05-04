@@ -32,7 +32,7 @@ namespace KazouAPI
                     )
             );
 
-            services.AddMvc();
+            services.AddControllers() ;
             services.AddCors();
         }
 

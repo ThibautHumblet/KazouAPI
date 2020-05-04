@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace KazouAPI.Controllers
 {
     [Route("api/v1/destinations")]
-    public class DestinationController : Controller
+    [ApiController]
+    public class DestinationController : ControllerBase
     {
         private readonly KazouContext context;
         public DestinationController(KazouContext context)
@@ -37,6 +38,8 @@ namespace KazouAPI.Controllers
         {
             context.Destinations.Add(newDestination);
             context.SaveChanges();
+            if (!ModelState.IsValid)
+                return BadRequest();
             return Created("", newDestination);
         }
 

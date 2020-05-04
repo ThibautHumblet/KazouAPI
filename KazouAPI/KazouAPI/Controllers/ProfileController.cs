@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace KazouAPI.Controllers
 {
     [Route("api/v1/profiles")]
-    public class ProfileController : Controller
+    [ApiController]
+    public class ProfileController : ControllerBase
     {
         private readonly KazouContext context;
         public ProfileController(KazouContext context)
@@ -37,6 +38,8 @@ namespace KazouAPI.Controllers
         {
             context.Profiles.Add(newProfile);
             context.SaveChanges();
+            if (!ModelState.IsValid)
+                return BadRequest();
             return Created("", newProfile);
         }
 

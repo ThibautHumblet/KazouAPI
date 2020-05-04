@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace KazouAPI.Controllers
 {
     [Route("api/v1/involvements")]
-    public class InvolvementController : Controller
+    [ApiController]
+    public class InvolvementController : ControllerBase
     {
         private readonly KazouContext context;
         public InvolvementController(KazouContext context)
@@ -38,6 +39,8 @@ namespace KazouAPI.Controllers
         {
             context.Involvements.Add(newInvolvement);
             context.SaveChanges();
+            if (!ModelState.IsValid)
+                return BadRequest();
             return Created("", newInvolvement);
         }
 
