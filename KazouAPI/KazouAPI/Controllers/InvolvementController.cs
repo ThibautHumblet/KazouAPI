@@ -20,7 +20,7 @@ namespace KazouAPI.Controllers
         [HttpGet]
         public List<Involvement> GetAllInvolvements()
         {
-            return context.Involvements.Include(i => i.Vacation).Include(i => i.Worker).Include(i => i.Profile).ToList();
+            return context.Involvements.Include(i => i.Vacation).ThenInclude(i => i.Destination).Include(i => i.Worker).Include(i => i.Profile).ToList();
         }
 
         [Route("{id}")]
