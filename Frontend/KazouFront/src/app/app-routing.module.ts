@@ -6,6 +6,8 @@ import { InvolvementsComponent } from './involvements/involvements.component';
 import { ProfilesComponent } from './profiles/profiles.component';
 import { VacationsComponent } from './vacations/vacations.component';
 import { WorkersComponent } from './workers/workers.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthGuard } from './core/auth.guard';
 
 
 const routes: Routes = [
@@ -19,12 +21,17 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { 
+    path: 'user-profile',
+    component: UserProfileComponent
+  },
+  { 
     path: 'destinations',
     component: DestinationsComponent
   },
   { 
     path: 'involvements',
-    component: InvolvementsComponent
+    component: InvolvementsComponent,
+    canActivate: [AuthGuard]
   },
   { 
     path: 'profiles',
@@ -36,7 +43,8 @@ const routes: Routes = [
   },
   { 
     path: 'workers',
-    component: WorkersComponent
+    component: WorkersComponent,
+    canActivate: [AuthGuard]
   },
 ];
 

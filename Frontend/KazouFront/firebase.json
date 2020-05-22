@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "KazouFront",
+      "public": "dist/KazouFront",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

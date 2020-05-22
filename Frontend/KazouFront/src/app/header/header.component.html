@@ -18,5 +18,15 @@
       <a routerLink="profiles">PROFIELEN</a>
       <a routerLink="vacations">VAKANTIES</a>
       <a routerLink="workers">VRIJWILLIGERS</a>
+        <div *ngIf="auth.user$ | async; then authenticated else guest">
+      </div>
+      <ng-template #guest>
+        <a routerLink="user-profile">LOGIN</a>
+    </ng-template>
+    <ng-template #authenticated>
+          <a *ngIf="auth.user$ | async as user" routerLink="user-profile">
+            <img class="profileImage" [src]="user.photoURL">
+            {{ user.displayName | uppercase }}</a>
+    </ng-template>
     </div>
   </div>
