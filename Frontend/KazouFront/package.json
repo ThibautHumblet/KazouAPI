@@ -23,6 +23,7 @@
     "angularfire2": "^5.4.2",
     "firebase": "^7.14.5",
     "primeicons": "^3.0.0-rc.1",
+    "primeng": "^9.0.6",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

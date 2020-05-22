@@ -3,10 +3,10 @@
 
 <ng-template #guest>
     <h1>Login</h1>
-    <p>Login to get started...</p>
-    
+    <p>Om bepaalde pagina's te zien, moet je aangemeld zijn. Aanmelden gaat via :</p>
+    <br>
     <button (click)="auth.googleSignin()">
-        <i class="pi pi-google"></i> Connect met Google
+        <i class="pi pi-google"></i> Login met Google
     </button>
 
 </ng-template>
@@ -16,6 +16,8 @@
         <h1>Welkom, {{ user.displayName }}</h1>
         <img  [src]="user.photoURL">
         <p>User ID: {{ user.uid }}</p>
-        <button (click)="auth.signOut()">Logout</button>
+        <br>
+        <button (click)="auth.signOut()">
+        <i class="pi pi-google"></i> Uitloggen</button>
     </div>
 </ng-template>
