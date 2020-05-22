@@ -8,7 +8,7 @@
 }
 
 .navbar img {
-    height: 130px;
+    height: 18vh;
     padding-left: 10px;
     padding-top: 5px;
     z-index: 200;
@@ -134,8 +134,7 @@
     /*#region Navbar*/
     .navbar img {
         position: relative;
-        padding-top: 50px;
-        height: 175px;
+        padding-top: 8vh;
     }
     .navbar>.navbar-links {
         font-size: 20px;
