@@ -2,18 +2,18 @@
 </div>
 
 <ng-template #guest>
-    <h3>Welkom, Gast</h3>
+    <h1>Login</h1>
     <p>Login to get started...</p>
     
     <button (click)="auth.googleSignin()">
-        <i class="fa fa-google"></i> Connect met Google
+        <i class="pi pi-google"></i> Connect met Google
     </button>
 
 </ng-template>
 
 <ng-template #authenticated>
     <div *ngIf="auth.user$ | async as user">
-        <h3>Welkom, {{ user.displayName }}</h3>
+        <h1>Welkom, {{ user.displayName }}</h1>
         <img  [src]="user.photoURL">
         <p>User ID: {{ user.uid }}</p>
         <button (click)="auth.signOut()">Logout</button>

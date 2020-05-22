@@ -49,8 +49,8 @@ table {
 }
 
 .pageBody{
-    min-height: 86vh; 
-    padding-top: 2vh;
+    min-height: 83vh; 
+	padding: 5vh 8vh 0vh;
     color: #2b2b2b;
 	background-color: #e2e2e2;
 	background-image: url("https://www.transparenttextures.com/patterns/ag-square.png");
