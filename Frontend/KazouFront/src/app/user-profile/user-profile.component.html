@@ -1,22 +1,25 @@
-<div *ngIf="auth.user$ | async; then authenticated else guest">
+<div *ngIf="auth.user; then authenticated else guest">
 </div>
 
 <ng-template #guest>
     <h1>Login</h1>
     <p>Om bepaalde pagina's te zien, moet je aangemeld zijn. Aanmelden gaat via :</p>
     <br>
-    <button (click)="auth.googleSignin()">
+    <button (click)="auth.authenticate()">
         <i class="pi pi-google"></i> Login met Google
     </button>
 
 </ng-template>
 
 <ng-template #authenticated>
-    <div *ngIf="auth.user$ | async as user">
-        <h1>Welkom, {{ user.displayName }}</h1>
-        <img  [src]="user.photoURL">
-        <p>User ID: {{ user.uid }}</p>
+    <div *ngIf="auth.user as user">
+        <h1>Welkom, {{ auth.name }}</h1>
+        <img  [src]="auth.profilepic">
+        <p>User ID: {{ auth.uid }}</p>
         <br>
+        <button (click)="auth.getAuthResponse()" style="margin-right: 16px;">
+            Auth response
+        </button>
         <button (click)="auth.signOut()">
         <i class="pi pi-google"></i> Uitloggen</button>
     </div>

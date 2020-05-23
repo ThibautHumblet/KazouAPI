@@ -7,7 +7,6 @@ import { ProfilesComponent } from './profiles/profiles.component';
 import { VacationsComponent } from './vacations/vacations.component';
 import { WorkersComponent } from './workers/workers.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AuthGuard } from './core/auth.guard';
 
 
 const routes: Routes = [
@@ -30,8 +29,7 @@ const routes: Routes = [
   },
   { 
     path: 'involvements',
-    component: InvolvementsComponent,
-    canActivate: [AuthGuard]
+    component: InvolvementsComponent
   },
   { 
     path: 'profiles',
@@ -43,8 +41,7 @@ const routes: Routes = [
   },
   { 
     path: 'workers',
-    component: WorkersComponent,
-    canActivate: [AuthGuard]
+    component: WorkersComponent
   },
 ];
 
