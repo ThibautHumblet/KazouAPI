@@ -30,7 +30,8 @@ const routes: Routes = [
   },
   { 
     path: 'involvements',
-    component: InvolvementsComponent
+    component: InvolvementsComponent,
+    canActivate: [RouterGuardService]
   },
   { 
     path: 'profiles',
