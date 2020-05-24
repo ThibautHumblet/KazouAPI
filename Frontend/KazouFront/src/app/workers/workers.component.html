@@ -1,1 +1,40 @@
 <h1>Vrijwilligers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Voornaam</th>
+      <th>Achternaam</th>
+      <th>Email</th>
+      <th>Verjaardag</th>
+      <th>Verwijderen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let worker of data">
+      <tr>
+        <td>
+          {{worker.workerID}}
+        </td>
+        <td>
+          {{worker.firstName}}
+        </td>
+        <td>
+          {{worker.lastName}}
+        </td>
+        <td>
+          {{worker.emailAddress}}
+        </td>
+        <td>
+          {{worker.birthDay | date}}
+        </td>
+        <td>
+          <button>X</button>
+        </td>
+      </tr>
+
+    </ng-container>
+
+  </tbody>
+</table>

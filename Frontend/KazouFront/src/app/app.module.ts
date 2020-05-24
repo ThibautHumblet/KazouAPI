@@ -11,10 +11,13 @@ import { ProfilesComponent } from './profiles/profiles.component';
 import { VacationsComponent } from './vacations/vacations.component';
 import { WorkersComponent } from './workers/workers.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HttpModule } from '@angular/http';
 
 import { RouterGuardService } from './core/router-guard.service';
 
 import { AuthService } from './core/auth.service';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { AuthService } from './core/auth.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

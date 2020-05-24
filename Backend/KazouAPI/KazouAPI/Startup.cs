@@ -44,6 +44,9 @@ namespace KazouAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             DBInitializer.Initialize(kazouContext);
 
             app.UseHttpsRedirection();
