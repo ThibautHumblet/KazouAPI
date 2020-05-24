@@ -12,6 +12,10 @@ import { VacationsComponent } from './vacations/vacations.component';
 import { WorkersComponent } from './workers/workers.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import { RouterGuardService } from './core/router-guard.service';
+
+import { AuthService } from './core/auth.service';
+
 @NgModule({
   declarations: [
     AppComponent,

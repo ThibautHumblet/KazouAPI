@@ -7,6 +7,7 @@ import { ProfilesComponent } from './profiles/profiles.component';
 import { VacationsComponent } from './vacations/vacations.component';
 import { WorkersComponent } from './workers/workers.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RouterGuardService } from './core/router-guard.service';
 
 
 const routes: Routes = [
@@ -41,7 +42,8 @@ const routes: Routes = [
   },
   { 
     path: 'workers',
-    component: WorkersComponent
+    component: WorkersComponent,
+    canActivate: [RouterGuardService]
   },
 ];
 

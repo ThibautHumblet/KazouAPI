@@ -13,6 +13,8 @@ export class AuthService {
   profilepic: string;
   name: string;
   uid: string;
+
+  public profileSignedIn: boolean = false;
  
   constructor() { }
  
@@ -53,6 +55,7 @@ export class AuthService {
         user => this.user = user,
         error => this.error = error);
         this.getProfileInformation();
+        this.profileSignedIn =true;
     });
   }
  
@@ -73,6 +76,7 @@ export class AuthService {
    async signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     this.user = null;
+    this.profileSignedIn = false;
     auth2.signOut().then(function () {
         auth2.disconnect();
     });
