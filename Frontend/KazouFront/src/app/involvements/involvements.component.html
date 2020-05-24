@@ -1,1 +1,56 @@
 <h1>Engagementen</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Voornaam monitor</th>
+        <th>Achternaam monitor</th>
+        <th>Functie</th>
+        <th>Naam vakantie</th>
+        <th>Naam bestemming</th>
+        <th>Land</th>
+        <th>Datum vertrek</th>
+        <th>Datum aankomst</th>
+        <th>Verwijderen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let involvement of data">
+        <tr>
+          <td>
+            {{involvement.involvementID}}
+          </td>
+          <td>
+            {{involvement.worker.firstName}}
+          </td>
+          <td>
+            {{involvement.worker.lastName}}
+          </td>
+          <td>
+            {{involvement.profile.name}}
+          </td>
+          <td>
+            {{involvement.vacation.name}}
+          </td>
+          <td>
+            {{involvement.vacation.destination.name}}
+          </td>
+          <td>
+            {{involvement.vacation.destination.country}}
+          </td>
+          <td>
+            {{involvement.vacation.startDate | date:mediumDate}}
+          </td>
+          <td>
+            {{involvement.vacation.endDate | date:mediumDate}}
+          </td>
+          <td>
+            <button>X</button>
+          </td>
+        </tr>
+  
+      </ng-container>
+  
+    </tbody>
+  </table>

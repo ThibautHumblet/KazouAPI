@@ -1,1 +1,48 @@
 <h1>Vakanties</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Naam Vakantie</th>
+        <th>Naam vakantiecentrum</th>
+        <th>Land</th>
+        <th>Regio</th>
+        <th>Vertrekdatum</th>
+        <th>Aankomstdatum</th>
+        <th>Verwijderen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let vacation of data">
+        <tr>
+          <td>
+            {{vacation.vacationID}}
+          </td>
+          <td>
+            {{vacation.name}}
+          </td>
+          <td>
+            {{vacation.destination.name}}
+          </td>
+          <td>
+            {{vacation.destination.country}}
+          </td>
+          <td>
+              {{vacation.destination.region}}
+          </td>
+          <td>
+            {{vacation.startDate | date:mediumDate}}
+          </td>
+          <td>
+            {{vacation.endDate | date:mediumDate}}
+          </td>
+          <td>
+            <button>X</button>
+          </td>
+        </tr>
+  
+      </ng-container>
+  
+    </tbody>
+  </table>

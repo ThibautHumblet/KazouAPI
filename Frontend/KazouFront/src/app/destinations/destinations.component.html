@@ -1,1 +1,36 @@
 <h1>Vakantiebestemmingen</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Naam</th>
+        <th>Land</th>
+        <th>Regio</th>
+        <th>Verwijderen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let destination of data">
+        <tr>
+          <td>
+            {{destination.destinationID}}
+          </td>
+          <td>
+            {{destination.name}}
+          </td>
+          <td>
+            {{destination.country}}
+          </td>
+          <td>
+            {{destination.region}}
+          </td>
+          <td>
+            <button>X</button>
+          </td>
+        </tr>
+  
+      </ng-container>
+  
+    </tbody>
+  </table>

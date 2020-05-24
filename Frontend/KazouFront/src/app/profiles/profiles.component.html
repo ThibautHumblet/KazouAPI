@@ -1,1 +1,32 @@
 <h1>Vakantieprofielen</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th>Verwijderen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let profile of data">
+        <tr>
+          <td>
+            {{profile.profileID}}
+          </td>
+          <td>
+            {{profile.name}}
+          </td>
+          <td>
+            {{profile.description}}
+          </td>
+          <td>
+            <button>X</button>
+          </td>
+        </tr>
+  
+      </ng-container>
+  
+    </tbody>
+  </table>
