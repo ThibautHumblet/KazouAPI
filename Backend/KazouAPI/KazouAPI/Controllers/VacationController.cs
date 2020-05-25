@@ -39,6 +39,12 @@ namespace KazouAPI.Controllers
             {
                 switch (sort)
                 {
+                    case "vacationID":
+                        if (dir == "asc")
+                            query = query.OrderBy(d => d.VacationID);
+                        else if (dir == "desc")
+                            query = query.OrderByDescending(d => d.VacationID);
+                        break;
                     case "name":
                         if (dir == "asc")
                             query = query.OrderBy(d => d.Name);

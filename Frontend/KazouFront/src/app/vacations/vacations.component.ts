@@ -11,15 +11,23 @@ export class VacationsComponent implements OnInit {
   loading: boolean;
   sortURL: string;
 
+  connectionString: string;
+
   constructor(public http: Http) { }
 
   ngOnInit() {
     this.getInvolvements();
   }
 
-  getInvolvements(): void {
+  getInvolvements() {
+  this.callBackend("https://localhost:44369/api/v1/vacations")
+  }
+
+  callBackend(connectionString): void{
+    this.data = null;
     this.loading = true;
-    this.http.request('https://localhost:44369/api/v1/vacations')
+
+    this.http.request(connectionString)
       .subscribe((res: Response) => {
         this.data = res.json();
         this.loading = false;
@@ -30,16 +38,22 @@ export class VacationsComponent implements OnInit {
   onChange(sortValue) {
     console.log(sortValue);
     switch (sortValue) {
-      case "naamAZ":
+      case "idFirst":
+        this.sortURL = "https://localhost:44369/api/v1/vacations?sort=vacationID&dir=asc"
+        break;
+      case "idLast":
+        this.sortURL = "https://localhost:44369/api/v1/vacations?sort=vacationID&dir=desc"
+        break;
+      case "nameAZ":
         this.sortURL = "https://localhost:44369/api/v1/vacations?sort=name&dir=asc"
         break;
-      case "naamZA":
+      case "nameZA":
         this.sortURL = "https://localhost:44369/api/v1/vacations?sort=name&dir=desc"
         break;
-      case "datumEerst":
+      case "dateFirst":
         this.sortURL = "https://localhost:44369/api/v1/vacations?sort=startdate&dir=asc"
         break;
-      case "datumLaatst":
+      case "DateLast":
         this.sortURL = "https://localhost:44369/api/v1/vacations?sort=startdate&dir=desc"
         break;
 
@@ -47,14 +61,7 @@ export class VacationsComponent implements OnInit {
         break;
     }
 
-    this.data= null;
+    this.callBackend(this.sortURL);
 
-    this.loading = true;
-    this.http.request(this.sortURL)
-      .subscribe((res: Response) => {
-        this.data = res.json();
-        this.loading = false;
-        console.log(this.data);
-      });
   }
 }
