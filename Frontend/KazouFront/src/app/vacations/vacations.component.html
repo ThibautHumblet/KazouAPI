@@ -46,3 +46,12 @@
   
     </tbody>
   </table>
+
+  <label for="sorteren">Sorteren op:</label>
+
+  <select name="sorteren" id="sorteren" (change)="onChange($event.target.value)">
+    <option value="naamAZ">Naam A-Z</option>
+    <option value="naamZA">Naam Z-A</option>
+    <option value="datumEerst">Startdatum eerst</option>
+    <option value="datumLaatst">Startdatum laatst</option>
+  </select>
