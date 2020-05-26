@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { UniquePipe } from '../pipes/unique.pipe'
 
 @Component({
   selector: 'app-vacations',
@@ -18,15 +18,22 @@ export class VacationsComponent implements OnInit {
   currentPage: number = 0;
   itemsPerPage: string;
 
+  vacationNames: string[];
+
   connectionString: string;
   pagingString: string;
 
   noFilter: boolean = true;
   pageChar: string;
 
+  nameSelected: boolean = true;
+  dateSelected: boolean;
+  destinationIDSelected: boolean;
+
   constructor(public http: Http) { }
 
   ngOnInit() {
+    this.getVacationNames();
     this.getInvolvements();
   }
 
@@ -121,8 +128,8 @@ export class VacationsComponent implements OnInit {
   pageUp() {
     console.log("Page Up");
     console.log(this.itemsPerPage);
-      this.currentPage++;
-      this.paging(this.itemsPerPage);
+    this.currentPage++;
+    this.paging(this.itemsPerPage);
   }
 
   pageDown() {
@@ -133,6 +140,41 @@ export class VacationsComponent implements OnInit {
     }
   }
 
+  getVacationNames() {
+    this.itemsPerPage = "10000";
+
+    this.vacationNames = null;
+    this.loading = true;
+
+    this.http.request(this.baseUrl + "?pageLength=10000")
+      .subscribe((res: Response) => {
+        this.vacationNames = res.json();
+        this.loading = false;
+        this.vacationNames = [...new Set(this.vacationNames.map(item => item.name))];
+        console.log(this.vacationNames)
+      });
+  }
+
+  searchField(property) {
+    switch (property) {
+      case "name":
+        this.nameSelected = true;
+        this.dateSelected = false;
+        this.destinationIDSelected = false;
+        break;
+      case "startdate":
+        this.nameSelected = false;
+        this.dateSelected = true;
+        this.destinationIDSelected = false;
+        break;
+      case "destinationID":
+        this.nameSelected = false;
+        this.dateSelected = false;
+        this.destinationIDSelected = true;
+        break;
+      default:
+        break;
+    }
+  }
+
 }
-
-
