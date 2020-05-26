@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { UniquePipe } from '../pipes/unique.pipe'
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-vacations',
@@ -30,6 +30,12 @@ export class VacationsComponent implements OnInit {
   dateSelected: boolean;
   destinationIDSelected: boolean;
 
+  searchby: string;
+  searchparam: string;
+  searchbyUrl: string = "?name=";
+  searchparamUrl: string;
+  searchUrl: string;
+
   constructor(public http: Http) { }
 
   ngOnInit() {
@@ -54,6 +60,14 @@ export class VacationsComponent implements OnInit {
         this.loading = false;
         console.log(this.data);
       });
+  }
+
+  checkChar() {
+    if (this.noFilter) {
+      this.pageChar = "?"
+    } else {
+      this.pageChar = "&"
+    }
   }
 
   onChange(sortValue) {
@@ -91,11 +105,9 @@ export class VacationsComponent implements OnInit {
 
   paging(pageValue) {
     console.log(pageValue);
-    if (this.noFilter) {
-      this.pageChar = "?"
-    } else {
-      this.pageChar = "&"
-    }
+
+    this.checkChar();
+
     switch (pageValue) {
       case "5":
         this.pageLengthUrl = "&pageLength=5"
@@ -161,20 +173,33 @@ export class VacationsComponent implements OnInit {
         this.nameSelected = true;
         this.dateSelected = false;
         this.destinationIDSelected = false;
+        this.searchbyUrl = "?name=";
         break;
       case "startdate":
         this.nameSelected = false;
         this.dateSelected = true;
         this.destinationIDSelected = false;
+        this.searchbyUrl = "?startDate=";
         break;
       case "destinationID":
         this.nameSelected = false;
         this.dateSelected = false;
         this.destinationIDSelected = true;
+        this.searchbyUrl = "?destinationID=";
         break;
       default:
         break;
     }
+    console.log(this.searchbyUrl);
+    this.noFilter = false;
   }
 
+  search() {
+    this.checkChar();
+    this.searchparamUrl = ((<HTMLInputElement>document.getElementById("searchparam")).value);
+    this.searchUrl = this.baseUrl + this.searchbyUrl + this.searchparamUrl
+    this.callBackend(this.searchUrl);
+    this.lastUrl = this.searchUrl;
+    this.noFilter = false;
+  }
 }

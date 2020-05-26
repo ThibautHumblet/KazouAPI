@@ -74,7 +74,6 @@
     >
   </button>
 
-  <form>
     <label for="search">Zoeken op:</label>
 
     <select name="search" id="search" (change)="searchField($event.target.value)">
@@ -83,15 +82,14 @@
       <option value="destinationID">BestemmingsID</option>
     </select>
 
-    <input type="date" *ngIf="dateSelected">
+    <input type="date" *ngIf="dateSelected" id="searchparam">
 
-    <select *ngIf="nameSelected">
+    <select *ngIf="nameSelected" id="searchparam">
       <option *ngFor="let vacation of vacationNames">{{vacation}}</option>
    </select>
 
-   <input type="number" *ngIf="destinationIDSelected">
+   <input type="number" *ngIf="destinationIDSelected" id="searchparam">
 
-   <button>
+   <button (click)="search()">
      Zoeken
    </button>
-  </form>
