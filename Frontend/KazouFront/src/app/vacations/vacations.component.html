@@ -47,9 +47,9 @@
     </tbody>
   </table>
 
-  <label for="sorteren">Sorteren op:</label>
+  <label for="sort">Sorteren op:</label>
 
-  <select name="sorteren" id="sorteren" (change)="onChange($event.target.value)">
+  <select name="sort" id="sort" (change)="onChange($event.target.value)">
     <option value="idFirst">ID eerst</option>
     <option value="idLast">ID laatst</option>
     <option value="nameAZ">Naam A-Z</option>
@@ -57,3 +57,19 @@
     <option value="dateFirst">Startdatum eerst</option>
     <option value="dateLast">Startdatum laatst</option>
   </select>
+
+  <label for="paging">Items per pagina:</label>
+
+  <select name="paging" id="paging" (change)="paging($event.target.value)">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="25">25</option>
+    <option value="50">50</option>
+  </select>
+
+  <button (click)="pageDown()">
+    <
+  </button>
+  <button (click)="pageUp()">
+    >
+  </button>

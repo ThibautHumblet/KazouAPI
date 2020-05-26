@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-vacations',
@@ -10,8 +11,18 @@ export class VacationsComponent implements OnInit {
   data: JSON;
   loading: boolean;
   sortURL: string;
+  baseUrl: string = "https://localhost:44369/api/v1/vacations";
+  lastUrl: string = this.baseUrl;
+  pageLengthUrl: string;
+  fullPageLengthUrl: string = "";
+  currentPage: number = 0;
+  itemsPerPage: string;
 
   connectionString: string;
+  pagingString: string;
+
+  noFilter: boolean = true;
+  pageChar: string;
 
   constructor(public http: Http) { }
 
@@ -20,14 +31,17 @@ export class VacationsComponent implements OnInit {
   }
 
   getInvolvements() {
-  this.callBackend("https://localhost:44369/api/v1/vacations")
+    this.callBackend(this.baseUrl)
+
   }
 
-  callBackend(connectionString): void{
+  callBackend(connectionString): void {
     this.data = null;
     this.loading = true;
 
-    this.http.request(connectionString)
+    this.lastUrl = connectionString;
+    console.log(connectionString + this.fullPageLengthUrl)
+    this.http.request(connectionString + this.fullPageLengthUrl)
       .subscribe((res: Response) => {
         this.data = res.json();
         this.loading = false;
@@ -39,29 +53,86 @@ export class VacationsComponent implements OnInit {
     console.log(sortValue);
     switch (sortValue) {
       case "idFirst":
-        this.sortURL = "https://localhost:44369/api/v1/vacations?sort=vacationID&dir=asc"
+        this.sortURL = "?sort=vacationID&dir=asc"
         break;
       case "idLast":
-        this.sortURL = "https://localhost:44369/api/v1/vacations?sort=vacationID&dir=desc"
+        this.sortURL = "?sort=vacationID&dir=desc"
         break;
       case "nameAZ":
-        this.sortURL = "https://localhost:44369/api/v1/vacations?sort=name&dir=asc"
+        this.sortURL = "?sort=name&dir=asc"
         break;
       case "nameZA":
-        this.sortURL = "https://localhost:44369/api/v1/vacations?sort=name&dir=desc"
+        this.sortURL = "?sort=name&dir=desc"
         break;
       case "dateFirst":
-        this.sortURL = "https://localhost:44369/api/v1/vacations?sort=startdate&dir=asc"
+        this.sortURL = "?sort=startdate&dir=asc"
         break;
-      case "DateLast":
-        this.sortURL = "https://localhost:44369/api/v1/vacations?sort=startdate&dir=desc"
+      case "dateLast":
+        this.sortURL = "?sort=startdate&dir=desc"
         break;
 
       default:
         break;
     }
 
-    this.callBackend(this.sortURL);
+    this.callBackend(this.baseUrl + this.sortURL);
+    console.log(this.baseUrl + this.sortURL);
+
+    this.noFilter = false;
 
   }
+
+  paging(pageValue) {
+    console.log(pageValue);
+    if (this.noFilter) {
+      this.pageChar = "?"
+    } else {
+      this.pageChar = "&"
+    }
+    switch (pageValue) {
+      case "5":
+        this.pageLengthUrl = "&pageLength=5"
+        this.itemsPerPage = "5";
+        break;
+      case "10":
+        this.pageLengthUrl = "&pageLength=10"
+        this.itemsPerPage = "10";
+        break;
+      case "25":
+        this.pageLengthUrl = "&pageLength=25"
+        this.itemsPerPage = "25";
+        break;
+      case "50":
+        this.pageLengthUrl = "&pageLength=50"
+        this.itemsPerPage = "50";
+        break;
+
+      default:
+        this.pageLengthUrl = "&pageLength=5"
+        this.itemsPerPage = "5";
+        break;
+    }
+
+    this.fullPageLengthUrl = this.pageChar + "page=" + this.currentPage + this.pageLengthUrl;
+
+    this.callBackend(this.lastUrl);
+  }
+
+  pageUp() {
+    console.log("Page Up");
+    console.log(this.itemsPerPage);
+      this.currentPage++;
+      this.paging(this.itemsPerPage);
+  }
+
+  pageDown() {
+    console.log("Page Down");
+    if (this.currentPage >= 1) {
+      this.currentPage--;
+      this.paging(this.itemsPerPage);
+    }
+  }
+
 }
+
+
