@@ -37,6 +37,8 @@ export class VacationsComponent implements OnInit {
 
   searchByID: boolean;
 
+  isAdding: boolean;
+
   constructor(public http: Http) { }
 
   ngOnInit() {
@@ -237,4 +239,13 @@ export class VacationsComponent implements OnInit {
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   }
+
+  addVacation() {
+    this.isAdding = true;
+  }
+
+  exit() {
+    this.isAdding = false;
+  }
+
 }

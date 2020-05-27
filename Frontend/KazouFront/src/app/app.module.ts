@@ -12,6 +12,7 @@ import { VacationsComponent } from './vacations/vacations.component';
 import { WorkersComponent } from './workers/workers.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms'
 
 import { RouterGuardService } from './core/router-guard.service';
 
@@ -35,7 +36,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
