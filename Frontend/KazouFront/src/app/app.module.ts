@@ -19,6 +19,8 @@ import { RouterGuardService } from './core/router-guard.service';
 import { AuthService } from './core/auth.service';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ApiService } from './services/api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,9 +39,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpModule,
+    HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

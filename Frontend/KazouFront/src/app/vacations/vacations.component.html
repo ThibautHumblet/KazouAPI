@@ -77,7 +77,7 @@
           </td>
         </tr>
       </tbody>
-      <button (click)="addVacation()" >Vakantie toevoegen</button>
+      <button (click)="addVacationForm()">Vakantie toevoegen</button>
     </table>
 
     <input type="number" id="searchByIdParam">
@@ -140,28 +140,33 @@
 </div>
 
 <div *ngIf="isAdding">
+  <form>
+    <div>
+      <label for="nameVacation">Naam vakantie:</label>
+      <input name="nameVacation" type="text" [(ngModel)]="form.name">
+    </div>
+    <div>
+      <label for="idVacation">ID bestemming:</label>
+      <input name="idVacation" type="number" [(ngModel)]="form.destinationID">
+    </div>
+    <div>
+      <label for="startDateVacation">Startdatum:</label>
+      <input name="startDateVacation" type="date" [(ngModel)]="form.startDate">
+    </div>
+    <div>
+      <label for="endDateVacation">Einddatum:</label>
+      <input name="endDateVacation" type="date" [(ngModel)]="form.endDate">
+    </div>
+    <div>
+      <button (click)="addVacation()">Vakantie Toevoegen</button>
+    </div>
+  </form>
   <div>
-    <label for="nameVacation">Naam vakantie:</label>
-    <input name="nameVacation" type="text" [(ngModel)]="form.name">
-  </div>
-  <div>
-    <label for="idVacation">ID bestemming:</label>
-    <input name="idVacation" type="number" [(ngModel)]="form.destinationId">
-  </div>
-  <div>
-    <label for="startDateVacation">Startdatum:</label>
-    <input name="startDateVacation" type="date" [(ngModel)]="form.startDate">
-  </div>
-  <div>
-    <label for="endDateVacation">Einddatum:</label>
-    <input name="endDateVacation"type="date" [(ngModel)]="form.endDate">
-  </div>
-  <div>
-    <button (click)="addVacation()">Vakantie Toevoegen</button>
     <button (click)="exit()">Annuleren</button>
   </div>
 
 
 </div>
 
-<div id="snackbar">Entry verwijderd</div>
+<div id="snackbarDelete">Vakantie verwijderd</div>
+<div id="snackbarAdd">Vakantie toegevoegd</div>

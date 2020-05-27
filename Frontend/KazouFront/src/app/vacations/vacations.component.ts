@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { ApiService } from '../services/api.service';
+import { AddVacationInfo } from '../services/post-info';
 
 @Component({
   selector: 'app-vacations',
@@ -38,8 +40,13 @@ export class VacationsComponent implements OnInit {
   searchByID: boolean;
 
   isAdding: boolean;
+  private addVacationInfo: AddVacationInfo;
+  form: any = {};
 
-  constructor(public http: Http) { }
+  errorMessage = '';
+  isPostFailed = false;
+
+  constructor(private apiService: ApiService, private http: Http) { }
 
   ngOnInit() {
     this.getVacationNames();
@@ -232,16 +239,41 @@ export class VacationsComponent implements OnInit {
     .subscribe((res: Response) => {
       this.data = res.json();
       this.loading = false;
-      this.ngOnInit()
+      this.ngOnInit();
+      this.showSnackbar("snackbarDelete");
     });
+  }
 
-    var x = document.getElementById("snackbar");
+  showSnackbar(snackbarName: string) {
+    var x = document.getElementById(snackbarName);
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   }
 
-  addVacation() {
+  addVacationForm() {
     this.isAdding = true;
+  }
+
+  addVacation(){
+    console.log(this.form)
+
+    this.addVacationInfo = new AddVacationInfo(
+      this.form.name,
+      this.form.destinationID,
+      this.form.startDate,
+      this.form.endDate
+    )
+
+    this.apiService.addVacation(this.addVacationInfo).subscribe(data => {
+      console.log(data);
+      this.exit();
+      this.showSnackbar("snackbarAdd")
+    },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.reason;
+        this.isPostFailed = true;
+      });
   }
 
   exit() {
