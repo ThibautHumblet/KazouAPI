@@ -1,6 +1,6 @@
 <h1>Vakanties</h1>
-
-<table>
+<div>
+  <table>
     <thead>
       <tr>
         <th>ID</th>
@@ -13,7 +13,7 @@
         <th>Verwijderen</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="!searchByID">
       <ng-container *ngFor="let vacation of data">
         <tr>
           <td>
@@ -29,7 +29,7 @@
             {{vacation.destination.country}}
           </td>
           <td>
-              {{vacation.destination.region}}
+            {{vacation.destination.region}}
           </td>
           <td>
             {{vacation.startDate | date:mediumDate}}
@@ -38,14 +38,53 @@
             {{vacation.endDate | date:mediumDate}}
           </td>
           <td>
-            <button>X</button>
+            <button (click)="delete(vacation.vacationID)"><i class="pi pi-times"></i></button>
           </td>
         </tr>
-  
+
       </ng-container>
-  
+
+    </tbody>
+    <tbody *ngIf="searchByID">
+      <tr>
+        <td>
+          {{data.vacationID}}
+        </td>
+        <td>
+          {{data.name}}
+        </td>
+        <td>
+          {{data.destination.name}}
+        </td>
+        <td>
+          {{data.destination.country}}
+        </td>
+        <td>
+          {{data.destination.region}}
+        </td>
+        <td>
+          {{data.startDate | date:mediumDate}}
+        </td>
+        <td>
+          {{data.endDate | date:mediumDate}}
+        </td>
+        <td>
+          <button (click)="delete(data.vacationID)"><i class="pi pi-times"></i></button>
+        </td>
+      </tr>
     </tbody>
   </table>
+  <input type="number" id="searchByIdParam">
+  <button (click)="searchById()">
+    Zoeken op ID
+  </button>
+  <button (click)="resetById()">
+    Reset
+  </button>
+</div>
+
+<div>
+<br>
 
   <label for="sort">Sorteren op:</label>
 
@@ -68,28 +107,29 @@
   </select>
 
   <button (click)="pageDown()">
-    <
-  </button>
-  <button (click)="pageUp()">
-    >
+    < </button> <button (click)="pageUp()">
+      >
   </button>
 
-    <label for="search">Zoeken op:</label>
+  <label for="search">Zoeken op:</label>
 
-    <select name="search" id="search" (change)="searchField($event.target.value)">
-      <option value="name">Naam</option>
-      <option value="startdate">Startdatum</option>
-      <option value="destinationID">BestemmingsID</option>
-    </select>
+  <select name="search" id="search" (change)="searchField($event.target.value)">
+    <option value="name">Naam</option>
+    <option value="startdate">Startdatum</option>
+    <option value="destinationID">BestemmingsID</option>
+  </select>
 
-    <input type="date" *ngIf="dateSelected" id="searchparam">
+  <input type="date" *ngIf="dateSelected" id="searchparam">
 
-    <select *ngIf="nameSelected" id="searchparam">
-      <option *ngFor="let vacation of vacationNames">{{vacation}}</option>
-   </select>
+  <select *ngIf="nameSelected" id="searchparam">
+    <option *ngFor="let vacation of vacationNames">{{vacation.name}}</option>
+  </select>
 
-   <input type="number" *ngIf="destinationIDSelected" id="searchparam">
+  <input type="number" *ngIf="destinationIDSelected" id="searchparam">
 
-   <button (click)="search()">
-     Zoeken
-   </button>
+  <button (click)="search()">
+    Zoeken
+  </button>
+</div>
+
+<div id="snackbar">Entry verwijderd</div>

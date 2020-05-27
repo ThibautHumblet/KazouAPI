@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-vacations',
@@ -35,6 +34,8 @@ export class VacationsComponent implements OnInit {
   searchbyUrl: string = "?name=";
   searchparamUrl: string;
   searchUrl: string;
+
+  searchByID: boolean;
 
   constructor(public http: Http) { }
 
@@ -162,7 +163,7 @@ export class VacationsComponent implements OnInit {
       .subscribe((res: Response) => {
         this.vacationNames = res.json();
         this.loading = false;
-        this.vacationNames = [...new Set(this.vacationNames.map(item => item.name))];
+        //this.vacationNames = [...new Set(this.vacationNames.map(item => item.name))]; // <==== DIT WERKT NOG NIET NAAR BEHOREN
         console.log(this.vacationNames)
       });
   }
@@ -201,5 +202,39 @@ export class VacationsComponent implements OnInit {
     this.callBackend(this.searchUrl);
     this.lastUrl = this.searchUrl;
     this.noFilter = false;
+  }
+
+  searchById() {
+    this.searchparamUrl = ((<HTMLInputElement>document.getElementById("searchByIdParam")).value);
+
+    this.data = null;
+    this.loading = true;
+
+    this.http.request(this.baseUrl+'/'+this.searchparamUrl)
+      .subscribe((res: Response) => {
+        this.data = res.json();
+        this.loading = false;
+        console.log(this.data);
+      });
+      this.searchByID= true
+  }
+
+  resetById() {
+    this.searchByID = false;
+    (<HTMLInputElement>document.getElementById("searchByIdParam")).value = null;
+    this.callBackend(this.lastUrl);
+  }
+
+  delete(deleteID) {
+    this.http.delete(this.baseUrl+'/'+deleteID)
+    .subscribe((res: Response) => {
+      this.data = res.json();
+      this.loading = false;
+      this.ngOnInit()
+    });
+
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   }
 }
