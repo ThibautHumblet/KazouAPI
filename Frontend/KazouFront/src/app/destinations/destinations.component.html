@@ -1,36 +1,118 @@
 <h1>Vakantiebestemmingen</h1>
-
+<div *ngIf="!isAdding && !isEditing">
 <table>
-    <thead>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Naam</th>
+      <th>Land</th>
+      <th>Regio</th>
+      <th>Weerbericht bekijken</th>
+      <th>Verwijderen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let destination of data">
       <tr>
-        <th>ID</th>
-        <th>Naam</th>
-        <th>Land</th>
-        <th>Regio</th>
-        <th>Verwijderen</th>
+        <td>
+          {{destination.destinationID}}
+        </td>
+        <td>
+          {{destination.name}}
+        </td>
+        <td>
+          {{destination.country}}
+        </td>
+        <td>
+          {{destination.region}}
+        </td>
+        <td>
+          <button (click)="getWeatherForecast(destination.region)">Krijg weerbericht <i class="pi pi-cloud"></i></button>
+        </td>
+        <td>
+          <button (click)="editForm(destination.destinationID)"><i class="pi pi-cog"></i></button>
+          <button (click)="deleteDestination(destination.destinationID)"><i class="pi pi-times"></i></button>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let destination of data">
-        <tr>
-          <td>
-            {{destination.destinationID}}
-          </td>
-          <td>
-            {{destination.name}}
-          </td>
-          <td>
-            {{destination.country}}
-          </td>
-          <td>
-            {{destination.region}}
-          </td>
-          <td>
-            <button>X</button>
-          </td>
-        </tr>
-  
-      </ng-container>
-  
-    </tbody>
-  </table>
+
+    </ng-container>
+
+  </tbody>
+  <button (click)="addDestinationForm()">Vakantie toevoegen</button>
+</table>
+</div>
+<div *ngIf="isAdding">
+  <h2>Vakantie toevoegen</h2>
+  <form>
+    <div>
+      <label for="nameDestination">Naam bestemming:</label>
+      <input name="nameDestination" type="text" [(ngModel)]="form.name">
+    </div>
+    <div>
+      <label for="countryDestination">Land bestemming:</label>
+      <input name="countryDestination" type="text" [(ngModel)]="form.country">
+    </div>
+    <div>
+      <label for="regionDestination">Regio bestemming:</label>
+      <input name="regionDestination" type="text" [(ngModel)]="form.region">
+    </div>
+    <div>
+      <button (click)="addDestination()">Bestemming toevoegen</button>
+    </div>
+  </form>
+  <div>
+    <button (click)="exit()">Annuleren</button>
+  </div>
+
+
+</div>
+
+<div *ngIf="isEditing">
+  <h2>Vakantie aanpassen</h2>
+  <form>
+    <div>
+      <label for="idDestination">Bestemming ID:</label>
+      <input name="idDestination" type="text" disabled [(ngModel)]="form.destinationID">
+    </div>
+    <div>
+      <label for="nameDestination">Naam bestemming:</label>
+      <input name="nameDestination" type="text" [(ngModel)]="form.name">
+    </div>
+    <div>
+      <label for="countryDestination">Land bestemming:</label>
+      <input name="countryDestination" type="text" [(ngModel)]="form.country">
+    </div>
+    <div>
+      <label for="regionDestination">Regio bestemming:</label>
+      <input name="regionDestination" type="text" [(ngModel)]="form.region">
+    </div>
+    <div>
+      <button (click)="editDestination()">Vakantie aanpassen</button>
+    </div>
+  </form>
+  <div>
+    <button (click)="exit()">Annuleren</button>
+  </div>
+
+</div>
+
+<div id="snackbarDelete">Bestemming verwijderd</div>
+<div id="snackbarAdd">Bestemming toegevoegd</div>
+<div id="snackbarEdit">Bestemming aangepast</div>
+
+<div *ngIf="isForecast" class="forecast">
+  <h3>Weerbericht op dit moment:</h3>
+  <img src={{forecast.current.weather_icons}}>
+  <p>
+    Gezochte locatie: {{ forecast.location.name }}, {{ forecast.location.country }}.
+  </p>
+  <p>
+    Beschrijving van het huidige weer: {{ forecast.current.weather_descriptions }}.
+  </p>
+  <p>
+    temeratuur in graden Celsius: {{ forecast.current.temperature }} °C.
+  </p>
+  <p>
+    Gevoelstemperatuur in graden Celsius: {{ forecast.current.feelslike }} °C.
+  <p>
+</div>

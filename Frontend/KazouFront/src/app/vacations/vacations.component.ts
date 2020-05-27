@@ -54,12 +54,7 @@ export class VacationsComponent implements OnInit {
 
   ngOnInit() {
     this.getVacationNames();
-    this.getInvolvements();
-  }
-
-  getInvolvements() {
     this.callBackend(this.baseUrl)
-
   }
 
   callBackend(connectionString): void {
@@ -239,12 +234,15 @@ export class VacationsComponent implements OnInit {
   }
 
   delete(deleteID) {
-    this.http.delete(this.baseUrl + '/' + deleteID)
-      .subscribe((res: Response) => {
-        this.data = res.json();
-        this.loading = false;
-        this.ngOnInit();
-        this.showSnackbar("snackbarDelete");
+    this.apiService.deleteVacation(deleteID).subscribe(data => {
+      console.log(data);
+      this.ngOnInit();
+      this.showSnackbar("snackbarDelete");
+    },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.reason;
+        this.isPostFailed = true;
       });
   }
 

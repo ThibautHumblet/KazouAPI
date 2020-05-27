@@ -27,3 +27,29 @@ export class EditVacationInfo {
         this.endDate = endDate;
     }
 }
+
+export class AddDestinationInfo {
+    name: string;
+    country: string;
+    region: string
+
+    constructor(name: string, country: string, region: string) {
+        this.name = name;
+        this.country = country;
+        this.region = region;
+    }
+}
+
+export class EditDestinationInfo {
+    destinationID: number;
+    name: string;
+    country: string;
+    region: string
+
+    constructor(destinationID: number, name: string, country: string, region: string) {
+        this.destinationID = destinationID;
+        this.name = name;
+        this.country = country;
+        this.region = region;
+    }
+}
