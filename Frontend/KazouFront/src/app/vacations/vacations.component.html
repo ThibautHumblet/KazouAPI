@@ -1,6 +1,6 @@
 <h1>Vakanties</h1>
 
-<div *ngIf="!isAdding">
+<div *ngIf="!isAdding && !isEditing">
   <div>
     <table>
       <thead>
@@ -40,7 +40,7 @@
               {{vacation.endDate | date:mediumDate}}
             </td>
             <td>
-              <button (click)="edit(vacation.vacationID)"><i class="pi pi-cog"></i></button>
+              <button (click)="editForm(vacation.vacationID)"><i class="pi pi-cog"></i></button>
               <button (click)="delete(vacation.vacationID)"><i class="pi pi-times"></i></button>
             </td>
           </tr>
@@ -140,6 +140,7 @@
 </div>
 
 <div *ngIf="isAdding">
+  <h2>Vakantie toevoegen</h2>
   <form>
     <div>
       <label for="nameVacation">Naam vakantie:</label>
@@ -168,5 +169,39 @@
 
 </div>
 
+<div *ngIf="isEditing">
+  <h2>Vakantie aanpassen</h2>
+  <form>
+    <div>
+      <label for="idVacation">Vakantie ID:</label>
+      <input name="idVacation" type="text" disabled [(ngModel)]="form.vacationID">
+    </div>
+    <div>
+      <label for="nameVacation">Naam vakantie:</label>
+      <input name="nameVacation" type="text" [(ngModel)]="form.name">
+    </div>
+    <div>
+      <label for="idVacationDestination">ID bestemming:</label>
+      <input name="idVacationDestination" type="number" [(ngModel)]="form.destinationID">
+    </div>
+    <div>
+      <label for="startDateVacation">Startdatum:</label>
+      <input name="startDateVacation" type="date" [(ngModel)]="form.startDate">
+    </div>
+    <div>
+      <label for="endDateVacation">Einddatum:</label>
+      <input name="endDateVacation" type="date" [(ngModel)]="form.endDate">
+    </div>
+    <div>
+      <button (click)="editVacation()">Vakantie aanpassen</button>
+    </div>
+  </form>
+  <div>
+    <button (click)="exit()">Annuleren</button>
+  </div>
+
+</div>
+
 <div id="snackbarDelete">Vakantie verwijderd</div>
 <div id="snackbarAdd">Vakantie toegevoegd</div>
+<div id="snackbarEdit">Vakantie aangepast</div>

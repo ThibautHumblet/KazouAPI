@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AddVacationInfo } from './post-info';
+import { AddVacationInfo, EditVacationInfo } from './post-info';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  addVacation(info: AddVacationInfo){
+  addVacation(info: AddVacationInfo) {
     return this.http.post(this.vacationUrl, info)
-  }  
+  }
+
+  editVacation(info: EditVacationInfo) {
+    return this.http.put(this.vacationUrl, info)
+  }
 
 }

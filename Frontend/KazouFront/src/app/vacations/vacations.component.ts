@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { ApiService } from '../services/api.service';
-import { AddVacationInfo } from '../services/post-info';
+import { AddVacationInfo, EditVacationInfo } from '../services/post-info';
 
 @Component({
   selector: 'app-vacations',
@@ -10,6 +10,7 @@ import { AddVacationInfo } from '../services/post-info';
 })
 export class VacationsComponent implements OnInit {
   data: JSON;
+  vacations: any = [];
   loading: boolean;
   sortURL: string;
   baseUrl: string = "https://localhost:44369/api/v1/vacations";
@@ -40,8 +41,11 @@ export class VacationsComponent implements OnInit {
   searchByID: boolean;
 
   isAdding: boolean;
+  isEditing: boolean;
   private addVacationInfo: AddVacationInfo;
+  private editVacationInfo: EditVacationInfo;
   form: any = {};
+  editVacationID: number;
 
   errorMessage = '';
   isPostFailed = false;
@@ -219,13 +223,13 @@ export class VacationsComponent implements OnInit {
     this.data = null;
     this.loading = true;
 
-    this.http.request(this.baseUrl+'/'+this.searchparamUrl)
+    this.http.request(this.baseUrl + '/' + this.searchparamUrl)
       .subscribe((res: Response) => {
         this.data = res.json();
         this.loading = false;
         console.log(this.data);
       });
-      this.searchByID= true
+    this.searchByID = true
   }
 
   resetById() {
@@ -235,26 +239,26 @@ export class VacationsComponent implements OnInit {
   }
 
   delete(deleteID) {
-    this.http.delete(this.baseUrl+'/'+deleteID)
-    .subscribe((res: Response) => {
-      this.data = res.json();
-      this.loading = false;
-      this.ngOnInit();
-      this.showSnackbar("snackbarDelete");
-    });
+    this.http.delete(this.baseUrl + '/' + deleteID)
+      .subscribe((res: Response) => {
+        this.data = res.json();
+        this.loading = false;
+        this.ngOnInit();
+        this.showSnackbar("snackbarDelete");
+      });
   }
 
   showSnackbar(snackbarName: string) {
     var x = document.getElementById(snackbarName);
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
   }
 
   addVacationForm() {
     this.isAdding = true;
   }
 
-  addVacation(){
+  addVacation() {
     console.log(this.form)
 
     this.addVacationInfo = new AddVacationInfo(
@@ -278,6 +282,35 @@ export class VacationsComponent implements OnInit {
 
   exit() {
     this.isAdding = false;
+    this.isEditing = false;
+    this.form = {};
+    this.ngOnInit();
+  }
+
+  editForm(vacationID: number) {
+    this.form.vacationID = vacationID;
+    this.isEditing = true;
+  }
+
+  editVacation() {
+    this.editVacationInfo = new EditVacationInfo(
+      this.form.vacationID,
+      this.form.name,
+      this.form.destinationID,
+      this.form.startDate,
+      this.form.endDate
+    )
+
+    this.apiService.editVacation(this.editVacationInfo).subscribe(data => {
+      console.log(data);
+      this.exit();
+      this.showSnackbar("snackbarEdit")
+    },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.reason;
+        this.isPostFailed = true;
+      });
   }
 
 }
