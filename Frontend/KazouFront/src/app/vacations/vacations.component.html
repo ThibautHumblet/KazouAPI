@@ -15,6 +15,18 @@
           <th>Aanpassen Verwijderen</th>
         </tr>
       </thead>
+      <div *ngIf="loading" class="loading">
+        Loading Data
+        <div class="loadingAnimation">
+  
+          <span id="loadingAnimation_1">
+          </span>
+          <span id="loadingAnimation_2">
+          </span>
+          <span id="loadingAnimation_3">
+          </span>
+        </div>
+      </div>
       <tbody *ngIf="!searchByID">
         <ng-container *ngFor="let vacation of data">
           <tr>
