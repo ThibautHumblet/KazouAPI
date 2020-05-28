@@ -8,11 +8,11 @@ import { AddVacationInfo, EditVacationInfo, AddDestinationInfo, EditDestinationI
   providedIn: 'root'
 })
 export class ApiService {
-  vacationUrl: string = "https://localhost:44369/api/v1/vacations/";
-  destinationUrl: string = "https://localhost:44369/api/v1/destinations/";
-  involvementUrl: string = "https://localhost:44369/api/v1/involvements/";
-  profileUrl: string = "https://localhost:44369/api/v1/profiles/";
-  workerUrl: string = "https://localhost:44369/api/v1/workers/";
+  vacationUrl: string = "https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/vacations/";
+  destinationUrl: string = "https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/destinations/";
+  involvementUrl: string = "https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/involvements/";
+  profileUrl: string = "https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/profiles/";
+  workerUrl: string = "https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/workers/";
 
   constructor(private http: HttpClient) { }
 

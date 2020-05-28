@@ -13,7 +13,7 @@ export class VacationsComponent implements OnInit {
   vacations: any = [];
   loading: boolean;
   sortURL: string;
-  baseUrl: string = "https://localhost:44369/api/v1/vacations";
+  baseUrl: string = "https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/vacations";
   lastUrl: string = this.baseUrl;
   pageLengthUrl: string;
   fullPageLengthUrl: string = "";

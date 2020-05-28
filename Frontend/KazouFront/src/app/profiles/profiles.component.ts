@@ -31,7 +31,7 @@ export class ProfilesComponent implements OnInit {
 
   getProfiles(): void {
     this.loading = true;
-    this.http.request('https://localhost:44369/api/v1/profiles')
+    this.http.request('https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/profiles/')
     .subscribe((res: Response) => {
       this.data = res.json();
       this.loading = false;

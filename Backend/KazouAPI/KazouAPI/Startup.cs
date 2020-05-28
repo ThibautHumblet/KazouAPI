@@ -27,7 +27,7 @@ namespace KazouAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<KazouContext>(
-                options => options.UseSqlServer(
+                options => options.UseMySql(
                     Configuration.GetConnectionString("DefaultConnection")
                     )
             );

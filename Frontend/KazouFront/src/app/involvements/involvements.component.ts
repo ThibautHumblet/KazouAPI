@@ -31,7 +31,7 @@ export class InvolvementsComponent implements OnInit {
 
   getInvolvements(): void {
     this.loading = true;
-    this.http.request('https://localhost:44369/api/v1/involvements')
+    this.http.request('https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/involvements/')
     .subscribe((res: Response) => {
       this.data = res.json();
       this.loading = false;
