@@ -31,7 +31,7 @@ export class WorkersComponent implements OnInit {
 
   getWorkers(): void {
     this.loading = true;
-    this.http.request('https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/workers')
+    this.http.request('https://kazouapi-1590156656031.ew.r.appspot.com/api/v1/workers/')
     .subscribe((res: Response) => {
       this.data = res.json();
       this.loading = false;

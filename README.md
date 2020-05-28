@@ -1,5 +1,5 @@
 # KazouAPI
-De kazouAPI is een om de vakanties van monitoren weer te geven. Maar ze doet meer dan dat. Een beknopt overzicht hieronder.
+De kazouAPI is een API om de vakanties van monitoren weer te geven. Maar ze doet meer dan dat. Een beknopt overzicht hieronder.
 
 
 ## Wat doet de API?
