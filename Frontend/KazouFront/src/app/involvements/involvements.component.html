@@ -1,5 +1,5 @@
 <h1>Engagementen</h1>
-
+<div *ngIf="!isAdding && !isEditing">
 <table>
     <thead>
       <tr>
@@ -46,11 +46,74 @@
             {{involvement.vacation.endDate | date:mediumDate}}
           </td>
           <td>
-            <button>X</button>
+            <button (click)="editForm(involvement.involvementID)"><i class="pi pi-cog"></i></button>
+            <button (click)="deleteInvolvement(involvement.involvementID)"><i class="pi pi-times"></i></button>
           </td>
         </tr>
   
       </ng-container>
   
     </tbody>
+    <button (click)="addInvolvementForm()">Engagement toevoegen</button>
   </table>
+</div>
+  <div *ngIf="isAdding">
+    <h2>Engagement toevoegen</h2>
+    <form>
+      <div>
+        <label for="idVacation">ID Vakantie:</label>
+        <input name="idVacation" type="number" [(ngModel)]="form.vacationID">
+      </div>
+      <div>
+        <label for="idWorker">ID vrijwilliger:</label>
+        <input name="idWorker" type="number" [(ngModel)]="form.workerID">
+      </div>
+      <div>
+        <label for="idProfile">ID profiel:</label>
+        <input name="idProfile" type="number" [(ngModel)]="form.profileID">
+      </div>
+      <div>
+        <button (click)="addInvolvement()">Engagement toevoegen</button>
+      </div>
+    </form>
+    <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>
+    <div>
+      <button (click)="exit()">Annuleren</button>
+    </div>
+  
+  
+  </div>
+  
+  <div *ngIf="isEditing">
+    <h2>Involvement aanpassen</h2>
+    <form>
+      <div>
+        <label for="idInvolvement">Engagement ID:</label>
+        <input name="idInvolvement" type="text" disabled [(ngModel)]="form.involvementID">
+      </div>
+      <div>
+        <label for="idVacation">ID Vakantie:</label>
+        <input name="idVacation" type="number" [(ngModel)]="form.vacationID">
+      </div>
+      <div>
+        <label for="idWorker">ID vrijwilliger:</label>
+        <input name="idWorker" type="number" [(ngModel)]="form.workerID">
+      </div>
+      <div>
+        <label for="idProfile">ID profiel:</label>
+        <input name="idProfile" type="number" [(ngModel)]="form.profileID">
+      </div>
+      <div>
+        <button (click)="addInvolvement()">Engagement aanpassen</button>
+      </div>
+    </form>
+    <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>
+    <div>
+      <button (click)="exit()">Annuleren</button>
+    </div>
+  
+  </div>
+  
+  <div id="snackbarDelete">Engagement verwijderd</div>
+  <div id="snackbarAdd">Engagement toegevoegd</div>
+  <div id="snackbarEdit">Engagement aangepast</div>

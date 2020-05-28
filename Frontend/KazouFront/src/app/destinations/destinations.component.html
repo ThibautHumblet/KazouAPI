@@ -38,11 +38,11 @@
     </ng-container>
 
   </tbody>
-  <button (click)="addDestinationForm()">Vakantie toevoegen</button>
+  <button (click)="addDestinationForm()">Bestemming toevoegen</button>
 </table>
 </div>
 <div *ngIf="isAdding">
-  <h2>Vakantie toevoegen</h2>
+  <h2>Bestemming toevoegen</h2>
   <form>
     <div>
       <label for="nameDestination">Naam bestemming:</label>
@@ -60,6 +60,7 @@
       <button (click)="addDestination()">Bestemming toevoegen</button>
     </div>
   </form>
+  <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>
   <div>
     <button (click)="exit()">Annuleren</button>
   </div>
@@ -68,7 +69,7 @@
 </div>
 
 <div *ngIf="isEditing">
-  <h2>Vakantie aanpassen</h2>
+  <h2>Bestemming aanpassen</h2>
   <form>
     <div>
       <label for="idDestination">Bestemming ID:</label>
@@ -87,9 +88,10 @@
       <input name="regionDestination" type="text" [(ngModel)]="form.region">
     </div>
     <div>
-      <button (click)="editDestination()">Vakantie aanpassen</button>
+      <button (click)="editDestination()">Bestemming aanpassen</button>
     </div>
   </form>
+  <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>
   <div>
     <button (click)="exit()">Annuleren</button>
   </div>
@@ -110,7 +112,7 @@
     Beschrijving van het huidige weer: {{ forecast.current.weather_descriptions }}.
   </p>
   <p>
-    temeratuur in graden Celsius: {{ forecast.current.temperature }} °C.
+    Temeratuur in graden Celsius: {{ forecast.current.temperature }} °C.
   </p>
   <p>
     Gevoelstemperatuur in graden Celsius: {{ forecast.current.feelslike }} °C.

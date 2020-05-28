@@ -19,8 +19,10 @@ namespace KazouAPI.Model
         [StringLength(100)]
         [RegularExpression(@"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$")]
         public string LastName { get; set; }
+        [Required]
         [EmailAddress]
         public string EmailAddress { get; set; }
+        [Required]
         [DataType(DataType.Date)]
         public DateTime BirthDay { get; set; }
         [JsonIgnore]

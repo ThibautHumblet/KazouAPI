@@ -10,8 +10,11 @@ namespace KazouAPI.Model
     {
         [Key]
         public int DestinationID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Country { get; set; }
+        [Required]
         public string Region { get; set; }
     }
 }

@@ -10,10 +10,13 @@ namespace KazouAPI.Model
     {
         [Key]
         public int InvolvementID { get; set; }
+        [Required]
         public int VacationID { get; set; }
         public Vacation Vacation { get; set; }
+        [Required]
         public int WorkerID { get; set; }
         public Worker Worker { get; set; }
+        [Required]
         public int ProfileID { get; set; }
         public Profile Profile { get; set; }
     }

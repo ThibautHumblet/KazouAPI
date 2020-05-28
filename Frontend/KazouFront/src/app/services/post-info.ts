@@ -53,3 +53,29 @@ export class EditDestinationInfo {
         this.region = region;
     }
 }
+
+export class AddInvolvementInfo {
+    vacationID: number;
+    workerID: number;
+    profileID: number
+
+    constructor(vacationID: number, workerID: number, profileID: number) {
+        this.vacationID = vacationID;
+        this.workerID = workerID;
+        this.profileID = profileID;
+    }
+}
+
+export class EditInvolvementInfo {
+    involvementID: number;
+    vacationID: number;
+    workerID: number;
+    profileID: number
+
+    constructor(involvementID: number, vacationID: number, workerID: number, profileID: number) {
+        this.involvementID = involvementID;
+        this.vacationID = vacationID;
+        this.workerID = workerID;
+        this.profileID = profileID;
+    }
+}

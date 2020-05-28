@@ -14,6 +14,7 @@ namespace KazouAPI.Model
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         [JsonIgnore]
         public List<Involvement> Involvements { get; set; }

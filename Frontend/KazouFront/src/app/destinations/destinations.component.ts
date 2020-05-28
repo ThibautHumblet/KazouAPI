@@ -22,7 +22,7 @@ export class DestinationsComponent implements OnInit {
 
   form: any = {};
 
-  errorMessage = '';
+  errorMessage: JSON;
   isPostFailed = false;
 
   constructor(public http: Http, public apiService: ApiService) { }
@@ -83,7 +83,7 @@ export class DestinationsComponent implements OnInit {
     },
       error => {
         console.log(error);
-        this.errorMessage = error.error.reason;
+        this.errorMessage = error.error.errors;
         this.isPostFailed = true;
       });
   }
@@ -108,7 +108,7 @@ export class DestinationsComponent implements OnInit {
     },
       error => {
         console.log(error);
-        this.errorMessage = error.error.reason;
+        this.errorMessage = error.error.errors;
         this.isPostFailed = true;
       });
   }
@@ -121,7 +121,7 @@ export class DestinationsComponent implements OnInit {
     },
       error => {
         console.log(error);
-        this.errorMessage = error.error.reason;
+        this.errorMessage = error.error.errors;
         this.isPostFailed = true;
       });
   }

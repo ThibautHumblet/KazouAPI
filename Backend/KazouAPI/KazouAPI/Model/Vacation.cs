@@ -11,10 +11,14 @@ namespace KazouAPI.Model
     {
         [Key]
         public int VacationID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public int DestinationID { get; set; }
         public Destination Destination { get; set; }
+        [Required]
         public DateTime StartDate { get; set; }
+        [Required]
         public DateTime EndDate { get; set; }
         [JsonIgnore]
         public List<Involvement> Involvements { get; set; }
