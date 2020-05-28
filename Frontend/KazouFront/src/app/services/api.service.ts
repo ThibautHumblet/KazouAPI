@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AddVacationInfo, EditVacationInfo, AddDestinationInfo, EditDestinationInfo,
-          AddInvolvementInfo, EditInvolvementInfo, AddProfileInfo, EditProfileInfo } from './post-info';
+          AddInvolvementInfo, EditInvolvementInfo, AddProfileInfo, EditProfileInfo,
+          AddWorkerInfo, EditWorkerInfo } from './post-info';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class ApiService {
   destinationUrl: string = "https://localhost:44369/api/v1/destinations/";
   involvementUrl: string = "https://localhost:44369/api/v1/involvements/";
   profileUrl: string = "https://localhost:44369/api/v1/profiles/";
+  workerUrl: string = "https://localhost:44369/api/v1/workers/";
 
   constructor(private http: HttpClient) { }
 
@@ -60,6 +62,18 @@ export class ApiService {
 
   deleteProfile(profileID: number) {
     return this.http.delete(this.profileUrl+profileID);
+  }
+
+  addWorker(info: AddWorkerInfo) {
+    return this.http.post(this.workerUrl, info);
+  }
+
+  editWorker(info: EditWorkerInfo) {
+    return this.http.put(this.workerUrl, info);
+  }
+
+  deleteWorker(workerID: number) {
+    return this.http.delete(this.workerUrl+workerID);
   }
 
 }

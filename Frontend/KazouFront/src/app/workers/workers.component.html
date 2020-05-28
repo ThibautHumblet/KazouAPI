@@ -1,5 +1,5 @@
 <h1>Vrijwilligers</h1>
-
+<div *ngIf="!isAdding && !isEditing">
 <table>
   <thead>
     <tr>
@@ -30,11 +30,82 @@
           {{worker.birthDay | date}}
         </td>
         <td>
-          <button>X</button>
+          <button (click)="editForm(worker.workerID)"><i class="pi pi-cog"></i></button>
+          <button (click)="deleteWorker(worker.workerID)"><i class="pi pi-times"></i></button>
         </td>
       </tr>
 
     </ng-container>
 
   </tbody>
+  <button (click)="addWorkerForm()">Vrijwilliger toevoegen</button>
 </table>
+</div>
+<div *ngIf="isAdding">
+  <h2>Vrijwilliger toevoegen</h2>
+  <form>
+    <div>
+      <label for="firstnameWorker">Voornaam vrijwilliger:</label>
+      <input name="firstnameWorker" type="text" [(ngModel)]="form.firstName">
+    </div>
+    <div>
+      <label for="lastnameWorker">Achternaam vrijwilliger:</label>
+      <input name="lastnameWorker" type="text" [(ngModel)]="form.lastName">
+    </div>
+    <div>
+      <label for="emailWorker">E-mailadres vrijwilliger:</label>
+      <input name="emailWorker" type="text" [(ngModel)]="form.emailAddress">
+    </div>
+    <div>
+      <label for="birthdayWorker">Verjaardag vrijwilliger:</label>
+      <input name="birthdayWorker" type="date" [(ngModel)]="form.birthDay">
+    </div>
+    <div>
+      <button (click)="addWorker()">Vrijwilliger toevoegen</button>
+    </div>
+  </form>
+  <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>
+  <div>
+    <button (click)="exit()">Annuleren</button>
+  </div>
+
+
+</div>
+
+<div *ngIf="isEditing">
+  <h2>Vrijwilliger aanpassen</h2>
+  <form>
+    <div>
+      <label for="idWorker">Vrijwilliger ID:</label>
+      <input name="idWorker" type="number" disabled [(ngModel)]="form.workerID">
+    </div>
+    <div>
+      <label for="firstnameWorker">Voornaam vrijwilliger:</label>
+      <input name="firstnameWorker" type="text" [(ngModel)]="form.firstName">
+    </div>
+    <div>
+      <label for="lastnameWorker">Achternaam vrijwilliger:</label>
+      <input name="lastnameWorker" type="text" [(ngModel)]="form.lastName">
+    </div>
+    <div>
+      <label for="emailWorker">E-mailadres vrijwilliger:</label>
+      <input name="emailWorker" type="text" [(ngModel)]="form.emailAddress">
+    </div>
+    <div>
+      <label for="birthdayWorker">Verjaardag vrijwilliger:</label>
+      <input name="birthdayWorker" type="date" [(ngModel)]="form.birthDay">
+    </div>
+    <div>
+      <button (click)="editWorker()">Vrijwilliger aanpassen</button>
+    </div>
+  </form>
+  <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>
+  <div>
+    <button (click)="exit()">Annuleren</button>
+  </div>
+
+</div>
+
+<div id="snackbarDelete">Vrijwilliger verwijderd</div>
+<div id="snackbarAdd">Vrijwilliger toegevoegd</div>
+<div id="snackbarEdit">Vrijwilliger aangepast</div>

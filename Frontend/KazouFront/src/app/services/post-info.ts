@@ -101,3 +101,33 @@ export class EditProfileInfo {
         this.description = description;
     }
 }
+
+export class AddWorkerInfo {
+    firstName: string;
+    lastName: string;
+    emailAddress: string;
+    birthDay: Date;
+
+    constructor(firstName: string, lastName: string, emailAddress: string, birthDay: Date) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.birthDay = birthDay;
+    }
+}
+
+export class EditWorkerInfo {
+    workerID: number;
+    firstName: string;
+    lastName: string;
+    emailAddress: string;
+    birthDay: Date;
+
+    constructor(workerID: number, firstName: string, lastName: string, emailAddress: string, birthDay: Date) {
+        this.workerID = workerID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.birthDay = birthDay;
+    }
+}
