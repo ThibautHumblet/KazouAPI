@@ -67,6 +67,7 @@ export class InvolvementsComponent implements OnInit {
 
     this.apiService.addInvolvement(this.addInvolvementInfo).subscribe(data => {
       console.log(data);
+      this.isPostFailed = false;
       this.exit();
       this.showSnackbar("snackbarAdd")
     },
@@ -92,6 +93,7 @@ export class InvolvementsComponent implements OnInit {
 
     this.apiService.editInvolvement(this.editInvolvementInfo).subscribe(data => {
       console.log(data);
+      this.isPostFailed = false;
       this.exit();
       this.showSnackbar("snackbarEdit")
     },
@@ -105,6 +107,7 @@ export class InvolvementsComponent implements OnInit {
   deleteInvolvement(involvementID) {
     this.apiService.deleteInvolvement(involvementID).subscribe(data => {
       console.log(data);
+      this.isPostFailed = false;
       this.ngOnInit();
       this.showSnackbar("snackbarDelete");
     },

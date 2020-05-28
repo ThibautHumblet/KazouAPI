@@ -79,3 +79,25 @@ export class EditInvolvementInfo {
         this.profileID = profileID;
     }
 }
+
+export class AddProfileInfo {
+    name: string;
+    description: string;
+
+    constructor(name: string, description: string) {
+        this.name = name;
+        this.description = description;
+    }
+}
+
+export class EditProfileInfo {
+    profileID: number;
+    name: string;
+    description: string;
+
+    constructor(profileID: number, name: string, description: string) {
+        this.profileID = profileID;
+        this.name = name;
+        this.description = description;
+    }
+}

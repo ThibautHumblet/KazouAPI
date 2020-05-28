@@ -104,7 +104,7 @@
         <input name="idProfile" type="number" [(ngModel)]="form.profileID">
       </div>
       <div>
-        <button (click)="addInvolvement()">Engagement aanpassen</button>
+        <button (click)="editInvolvement()">Engagement aanpassen</button>
       </div>
     </form>
     <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>

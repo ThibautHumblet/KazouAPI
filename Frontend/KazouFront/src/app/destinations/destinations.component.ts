@@ -78,6 +78,7 @@ export class DestinationsComponent implements OnInit {
 
     this.apiService.addDestination(this.addDestinationInfo).subscribe(data => {
       console.log(data);
+      this.isPostFailed = false;
       this.exit();
       this.showSnackbar("snackbarAdd")
     },
@@ -103,6 +104,7 @@ export class DestinationsComponent implements OnInit {
 
     this.apiService.editDestination(this.editDestinationInfo).subscribe(data => {
       console.log(data);
+      this.isPostFailed = false;
       this.exit();
       this.showSnackbar("snackbarEdit")
     },
@@ -116,6 +118,7 @@ export class DestinationsComponent implements OnInit {
   deleteDestination(destinationID) {
     this.apiService.deleteDestination(destinationID).subscribe(data => {
       console.log(data);
+      this.isPostFailed = false;
       this.ngOnInit();
       this.showSnackbar("snackbarDelete");
     },

@@ -1,5 +1,5 @@
 <h1>Vakantieprofielen</h1>
-
+<div *ngIf="!isAdding && !isEditing">
 <table>
     <thead>
       <tr>
@@ -22,11 +22,66 @@
             {{profile.description}}
           </td>
           <td>
-            <button>X</button>
+            <button (click)="editForm(profile.profileID)"><i class="pi pi-cog"></i></button>
+            <button (click)="deleteProfile(profile.profileID)"><i class="pi pi-times"></i></button>
           </td>
         </tr>
   
       </ng-container>
   
     </tbody>
+    <button (click)="addProfileForm()">Profiel toevoegen</button>
   </table>
+</div>
+<div *ngIf="isAdding">
+  <h2>Profiel toevoegen</h2>
+  <form>
+    <div>
+      <label for="nameProfile">Naam profiel:</label>
+      <input name="nameProfile" type="text" [(ngModel)]="form.name">
+    </div>
+    <div>
+      <label for="descriptionProfile">Beschrijving profiel:</label>
+      <input name="descriptionProfile" type="text" [(ngModel)]="form.description">
+    </div>
+    <div>
+      <button (click)="addProfile()">Profiel toevoegen</button>
+    </div>
+  </form>
+  <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>
+  <div>
+    <button (click)="exit()">Annuleren</button>
+  </div>
+
+
+</div>
+
+<div *ngIf="isEditing">
+  <h2>Profiel aanpassen</h2>
+  <form>
+    <div>
+      <label for="idProfile">Profiel ID:</label>
+      <input name="idProfile" type="number" disabled [(ngModel)]="form.profileID">
+    </div>
+    <div>
+      <label for="nameProfile">Naam profiel:</label>
+      <input name="nameProfile" type="text" [(ngModel)]="form.name">
+    </div>
+    <div>
+      <label for="descriptionProfile">Beschrijving profiel:</label>
+      <input name="descriptionProfile" type="text" [(ngModel)]="form.description">
+    </div>
+    <div>
+      <button (click)="editProfile()">Profiel aanpassen</button>
+    </div>
+  </form>
+  <div class="error" *ngIf="isPostFailed"><p>De error is: </p>{{ errorMessage | json}}</div>
+  <div>
+    <button (click)="exit()">Annuleren</button>
+  </div>
+
+</div>
+
+<div id="snackbarDelete">Profiel verwijderd</div>
+<div id="snackbarAdd">Profiel toegevoegd</div>
+<div id="snackbarEdit">Profiel aangepast</div>
